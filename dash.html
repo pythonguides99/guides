@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolsa Technologies - Energy Tracking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4A8F6D',
+                            light: '#5BA57F',
+                            dark: '#3A7F5D'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 border-r border-gray-200 bg-white hidden md:block">
+            <div class="flex flex-col items-center py-8">
+                <!-- Logo image -->
+                <div class="w-24 h-24 flex items-center justify-center">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-pfPIab5A80Kr2Mt2eB6xgXRePQxzum.png" alt="Rolsa Technologies Logo" class="max-w-full max-h-full">
+                </div>
+            </div>
+            
+            <nav class="mt-8">
+                <a href="#" class="flex items-center px-6 py-3 bg-primary text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Dashboard
+                </a>
+                
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Energy Tracking
+                </a>
+                
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Bookings
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="flex justify-between items-center py-4 px-6 bg-white border-b border-gray-200">
+                <div class="md:hidden">
+                    <button class="text-gray-500 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="flex items-center ml-auto">
+                    <div class="relative mr-4">
+                        <button class="text-gray-500 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </button>
+                        <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                    </div>
+                    <div class="text-right mr-4">
+                        <p class="text-gray-800">Hello, <span class="text-primary font-medium">Max</span>!</p>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl font-semibold text-gray-800">Energy Tracking</h1>
+                        <h2 class="text-lg text-gray-600">Monitor and optimize your energy consumption</h2>
+                        <div class="w-96 h-1 bg-primary mt-2"></div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Export Data
+                        </button>
+                        <button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Add Device
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Energy Overview Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <!-- Current Usage Card -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-700">Current Usage</h3>
+                                <p class="text-sm text-gray-500">Real-time energy consumption</p>
+                            </div>
+                            <div class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Live</div>
+                        </div>
+                        <div class="mt-4 flex items-end">
+                            <div class="text-4xl font-bold text-gray-800">3.8</div>
+                            <div class="ml-2 text-lg font-medium text-gray-600">kWh</div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-primary h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1 text-xs text-gray-500">
+                                <span>0 kWh</span>
+                                <span>10 kWh</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <span class="text-green-600 font-medium">10% lower</span> than your daily average
+                        </div>
+                    </div>
+                    
+                    <!-- Monthly Savings Card -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-700">Monthly Savings</h3>
+                                <p class="text-sm text-gray-500">Compared to last month</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="mt-4 flex items-end">
+                            <div class="text-4xl font-bold text-gray-800">$42.50</div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-1 text-sm font-medium text-green-500">15.3% increase</span>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-600">
+                            You've saved 210 kWh this month
+                        </div>
+                    </div>
+                    
+                    <!-- Energy Tips Card -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-700">Recommendations</h3>
+                                <p class="text-sm text-gray-500">Tips to save more energy</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <div class="mt-4 space-y-3">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
+                                    <span class="text-green-600 text-xs">1</span>
+                                </div>
+                                <p class="ml-2 text-sm text-gray-600">Reduce heating in unused rooms (save up to 8%)</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
+                                    <span class="text-green-600 text-xs">2</span>
+                                </div>
+                                <p class="ml-2 text-sm text-gray-600">Schedule your washing machine for off-peak hours</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
+                                    <span class="text-green-600 text-xs">3</span>
+                                </div>
+                                <p class="ml-2 text-sm text-gray-600">Your kitchen devices use 20% more than average</p>
+                            </div>
+                        </div>
+                        <button class="mt-4 text-primary text-sm font-medium hover:underline">
+                            View all recommendations
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Energy Usage Chart -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-700">Energy Usage Trends</h3>
+                            <p class="text-sm text-gray-500">Past 7 days consumption</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-primary text-white px-3 py-1 rounded-md text-sm">Week</button>
+                            <button class="bg-white text-gray-700 border border-gray-300 px-3 py-1 rounded-md text-sm">Month</button>
+                            <button class="bg-white text-gray-700 border border-gray-300 px-3 py-1 rounded-md text-sm">Year</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple Chart Representation with False Data -->
+                    <div class="h-64 relative">
+                        <!-- Y-axis labels -->
+                        <div class="absolute left-0 top-0 bottom-0 w-10 flex flex-col justify-between text-xs text-gray-500">
+                            <span>10 kWh</span>
+                            <span>8 kWh</span>
+                            <span>6 kWh</span>
+                            <span>4 kWh</span>
+                            <span>2 kWh</span>
+                            <span>0 kWh</span>
+                        </div>
+                        
+                        <!-- Chart area -->
+                        <div class="ml-10 h-full flex items-end">
+                            <!-- Bars -->
+                            <div class="flex-1 flex items-end justify-around h-full pb-6 relative">
+                                <!-- Grid lines -->
+                                <div class="absolute left-0 right-0 h-1/5 border-t border-gray-200"></div>
+                                <div class="absolute left-0 right-0 h-2/5 border-t border-gray-200"></div>
+                                <div class="absolute left-0 right-0 h-3/5 border-t border-gray-200"></div>
+                                <div class="absolute left-0 right-0 h-4/5 border-t border-gray-200"></div>
+                                <div class="absolute left-0 right-0 h-full border-t border-gray-200"></div>
+                                
+                                <!-- Actual bars with false data -->
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 85%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 32%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 95%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 20%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 75%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-md" style="height: 60%"></div>
+                                </div>
+                                <div class="relative w-12 mx-1">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-red-500 rounded-t-md" style="height: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- X-axis labels -->
+                        <div class="ml-10 flex justify-around mt-2 text-xs text-gray-500">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex justify-between text-sm">
+                        <div class="text-gray-600">
+                            <span class="font-medium">Total:</span> 68.7 kWh
+                        </div>
+                        <div class="text-gray-600">
+                            <span class="font-medium">Daily Average:</span> 9.8 kWh
+                        </div>
+                        <div class="text-red-600">
+                            <span class="font-medium">Trend:</span> +23% vs last week
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Device Control and Settings -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Connected Devices -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-700 mb-4">Connected Devices</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Device 1 -->
+                            <div class="flex justify-between items-center p-3 border border-gray-200 rounded-md">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-gray-900">Smart Thermostat</div>
+                                        <div class="text-xs text-gray-500">Living Room • 0.8 kWh/day</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-gray-900 mr-3">21°C</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Device 2 -->
+                            <div class="flex justify-between items-center p-3 border border-gray-200 rounded-md">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-gray-900">Smart TV</div>
+                                        <div class="text-xs text-gray-500">Living Room • 1.2 kWh/day</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-gray-900 mr-3">Off</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Device 3 -->
+                            <div class="flex justify-between items-center p-3 border border-gray-200 rounded-md">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-gray-900">Smart Lights</div>
+                                        <div class="text-xs text-gray-500">Bedroom • 0.5 kWh/day</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-gray-900 mr-3">On</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Device 4 -->
+                            <div class="flex justify-between items-center p-3 border border-gray-200 rounded-md">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-gray-900">Water Heater</div>
+                                        <div class="text-xs text-gray-500">Bathroom • 3.2 kWh/day</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-gray-900 mr-3">On</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="mt-4 w-full py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">
+                            View All Devices
+                        </button>
+                    </div>
+                    
+                    <!-- Energy Settings -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-lg font-medium text-gray-700 mb-4">Energy Settings</h3>
+                        
+                        <!-- Energy Saving Mode -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">Energy Saving Mode</h4>
+                                    <p class="text-xs text-gray-500">Automatically optimize energy usage</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1 text-xs text-gray-500">
+                                <span>Eco</span>
+                                <span>Balanced</span>
+                                <span>Performance</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Notification Settings -->
+                        <div class="mb-6">
+                            <h4 class="text-sm font-medium text-gray-900 mb-3">Notification Settings</h4>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm text-gray-700">Usage Alerts</label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm text-gray-700">Weekly Reports</label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" checked>
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm text-gray-700">Savings Opportunities</label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Schedule Settings -->
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-900 mb-3">Schedule Settings</h4>
+                            
+                            <div class="p-3 bg-gray-50 rounded-md">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-gray-700">Night Mode Schedule</span>
+                                    <span class="text-xs font-medium text-primary">10:00 PM - 6:00 AM</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-700">Away Mode</span>
+                                    <button class="text-xs font-medium text-primary hover:underline">Configure</button>
+                                </div>
+                            </div>
+                            
+                            <button class="mt-4 w-full py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+                                Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
