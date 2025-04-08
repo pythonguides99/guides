@@ -71,14 +71,6 @@
                 </div>
                 
                 <div class="flex items-center ml-auto">
-                    <div class="relative mr-4">
-                        <button class="text-gray-500 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                        </button>
-                        <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-                    </div>
                     <div class="text-right mr-4">
                         <p class="text-gray-800">Hello, <span class="text-primary font-medium" id="user-name">User</span>!</p>
                     </div>
@@ -90,7 +82,6 @@
                         </button>
                         <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
                             <a href="#" id="logout-button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
                         </div>
                     </div>
@@ -115,18 +106,12 @@
                         <div class="w-96 h-1 bg-primary mt-2"></div>
                     </div>
                     
-                    <div class="flex space-x-2">
+                    <div>
                         <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
                             Export Data
-                        </button>
-                        <button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>
-                            Add Device
                         </button>
                     </div>
                 </div>
@@ -242,113 +227,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Device Control and Settings -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Connected Devices -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Connected Devices</h3>
-                        
-                        <div class="space-y-4" id="devices-container">
-                            <!-- Devices will be loaded here -->
-                            <div class="flex justify-between items-center p-3 border border-gray-200 rounded-md">
-                                <div class="flex items-center">
-                                    <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="ml-3">
-                                        <div class="text-sm font-medium text-gray-900">Loading devices...</div>
-                                        <div class="text-xs text-gray-500">Please wait</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="mt-4 w-full py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">
-                            View All Devices
-                        </button>
-                    </div>
-                    
-                    <!-- Energy Settings -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Energy Settings</h3>
-                        
-                        <!-- Energy Saving Mode -->
-                        <div class="mb-6">
-                            <div class="flex justify-between items-center mb-2">
-                                <div>
-                                    <h4 class="text-sm font-medium text-gray-900">Energy Saving Mode</h4>
-                                    <p class="text-xs text-gray-500">Automatically optimize energy usage</p>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" value="" class="sr-only peer" checked id="energy-saving-toggle">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                                </label>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-1.5">
-                                <div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
-                            </div>
-                            <div class="flex justify-between mt-1 text-xs text-gray-500">
-                                <span>Eco</span>
-                                <span>Balanced</span>
-                                <span>Performance</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Notification Settings -->
-                        <div class="mb-6">
-                            <h4 class="text-sm font-medium text-gray-900 mb-3">Notification Settings</h4>
-                            
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <label class="text-sm text-gray-700">Usage Alerts</label>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked id="usage-alerts-toggle">
-                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                                    </label>
-                                </div>
-                                
-                                <div class="flex justify-between items-center">
-                                    <label class="text-sm text-gray-700">Weekly Reports</label>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" checked id="weekly-reports-toggle">
-                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                                    </label>
-                                </div>
-                                
-                                <div class="flex justify-between items-center">
-                                    <label class="text-sm text-gray-700">Savings Opportunities</label>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" id="savings-opps-toggle">
-                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Schedule Settings -->
-                        <div>
-                            <h4 class="text-sm font-medium text-gray-900 mb-3">Schedule Settings</h4>
-                            
-                            <div class="p-3 bg-gray-50 rounded-md">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm text-gray-700">Night Mode Schedule</span>
-                                    <span class="text-xs font-medium text-primary">10:00 PM - 6:00 AM</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-700">Away Mode</span>
-                                    <button class="text-xs font-medium text-primary hover:underline">Configure</button>
-                                </div>
-                            </div>
-                            
-                            <button class="mt-4 w-full py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors" id="save-settings-btn">
-                                Save Settings
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </main>
         </div>
     </div>
@@ -360,7 +238,6 @@
             loadUserData();
             loadRealTimeData();
             loadEnergyUsage();
-            loadDevices();
             loadRecommendations();
             loadSummary();
             
@@ -379,11 +256,11 @@
                 
                 if (!data.authenticated) {
                     // Redirect to login page if not authenticated
-                    window.location.href = 'login.html';
+                    window.location.href = '/login';
                 }
             } catch (error) {
                 console.error('Auth check error:', error);
-                window.location.href = 'login.html';
+                window.location.href = '/login';
             }
         }
         
@@ -510,105 +387,6 @@
             });
         }
         
-        // Load devices data
-        async function loadDevices() {
-            try {
-                const response = await fetch('/api/energy/devices');
-                const devices = await response.json();
-                
-                const devicesContainer = document.getElementById('devices-container');
-                devicesContainer.innerHTML = '';
-                
-                // Device icon mapping
-                const deviceIcons = {
-                    'lighting': '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>',
-                    'appliance': '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>',
-                    'heating': '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" /></svg>',
-                    'charger': '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>',
-                    'generation': '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>'
-                };
-                
-                // Create device elements
-                devices.forEach(device => {
-                    const deviceElement = document.createElement('div');
-                    deviceElement.className = 'flex justify-between items-center p-3 border border-gray-200 rounded-md';
-                    
-                    const iconColor = device.type === 'lighting' ? 'yellow' : 
-                                     device.type === 'appliance' ? 'purple' : 
-                                     device.type === 'heating' ? 'red' : 
-                                     device.type === 'charger' ? 'blue' : 'green';
-                    
-                    const usageText = device.type === 'generation' ? 
-                                     (device.generation ? `${device.generation} kWh/day` : '0 kWh/day') : 
-                                     (device.usage ? `${device.usage} kWh/day` : '0 kWh/day');
-                    
-                    deviceElement.innerHTML = `
-                        <div class="flex items-center">
-                            <div class="h-10 w-10 rounded-full bg-${iconColor}-100 flex items-center justify-center">
-                                ${deviceIcons[device.type] || ''}
-                            </div>
-                            <div class="ml-3">
-                                <div class="text-sm font-medium text-gray-900">${device.name}</div>
-                                <div class="text-xs text-gray-500">${device.type.charAt(0).toUpperCase() + device.type.slice(1)} • ${usageText}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-sm font-medium text-gray-900 mr-3">${device.status === 'on' ? 'On' : 'Off'}</span>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer device-toggle" data-device-id="${device.id}" ${device.status === 'on' ? 'checked' : ''}>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                            </label>
-                        </div>
-                    `;
-                    
-                    devicesContainer.appendChild(deviceElement);
-                });
-                
-                // Add event listeners to device toggles
-                document.querySelectorAll('.device-toggle').forEach(toggle => {
-                    toggle.addEventListener('change', handleDeviceToggle);
-                });
-                
-            } catch (error) {
-                console.error('Error loading devices:', error);
-            }
-        }
-        
-        // Handle device toggle
-        async function handleDeviceToggle(event) {
-            const deviceId = parseInt(event.target.dataset.deviceId);
-            const newStatus = event.target.checked ? 'on' : 'off';
-            
-            try {
-                const response = await fetch('/api/energy/devices/update', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        id: deviceId,
-                        status: newStatus
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to update device status');
-                }
-                
-                // Update the status text next to the toggle
-                const statusText = event.target.parentElement.previousElementSibling;
-                statusText.textContent = newStatus === 'on' ? 'On' : 'Off';
-                
-                // Reload real-time data to reflect changes
-                loadRealTimeData();
-                
-            } catch (error) {
-                console.error('Error updating device:', error);
-                // Revert the toggle if there was an error
-                event.target.checked = !event.target.checked;
-            }
-        }
-        
         // Load recommendations
         async function loadRecommendations() {
             try {
@@ -679,7 +457,7 @@
                     });
                     
                     if (response.ok) {
-                        window.location.href = 'login.html';
+                        window.location.href = '/login';
                     }
                 } catch (error) {
                     console.error('Logout error:', error);
@@ -697,12 +475,6 @@
             
             document.getElementById('year-btn').addEventListener('click', function() {
                 setChartPeriod('year');
-            });
-            
-            // Save settings button
-            document.getElementById('save-settings-btn').addEventListener('click', function() {
-                // In a real app, this would save settings to the server
-                alert('Settings saved successfully!');
             });
         }
         

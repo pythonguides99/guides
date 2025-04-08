@@ -1,12 +1,9 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session, send_from_directory
-import os
-import random
-import json
-from datetime import datetime, timedelta
-import uuid
+from flask import Flask, request, send_from_directory, jsonify, session
 import sqlite3
 from sqlite3 import Error
-import time
+import os
+import random
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = 'rolsa_technologies_secret_key'
@@ -31,25 +28,6 @@ def create_tables():
         try:
             cursor = conn.cursor()
             
-            # Create bookings table
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS bookings (
-                    id TEXT PRIMARY KEY,
-                    service_type TEXT NOT NULL,
-                    date TEXT NOT NULL,
-                    time TEXT NOT NULL,
-                    first_name TEXT NOT NULL,
-                    last_name TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    phone TEXT NOT NULL,
-                    address TEXT NOT NULL,
-                    city TEXT NOT NULL,
-                    postcode TEXT NOT NULL,
-                    notes TEXT,
-                    timestamp TEXT NOT NULL
-                )
-            ''')
-            
             # Create energy_usage table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS energy_usage (
@@ -57,18 +35,6 @@ def create_tables():
                     date TEXT NOT NULL,
                     usage REAL NOT NULL,
                     cost REAL NOT NULL
-                )
-            ''')
-            
-            # Create devices table
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS devices (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    type TEXT NOT NULL,
-                    status TEXT NOT NULL,
-                    usage REAL,
-                    generation REAL
                 )
             ''')
             
@@ -96,10 +62,10 @@ def create_tables():
             conn.commit()
             
             # Check if we need to seed the database
-            cursor.execute("SELECT COUNT(*) FROM devices")
-            device_count = cursor.fetchone()[0]
+            cursor.execute("SELECT COUNT(*) FROM recommendations")
+            rec_count = cursor.fetchone()[0]
             
-            if device_count == 0:
+            if rec_count == 0:
                 seed_database(conn)
                 
         except Error as e:
@@ -112,19 +78,6 @@ def create_tables():
 def seed_database(conn):
     """Seed the database with initial data"""
     cursor = conn.cursor()
-    
-    # Seed devices
-    devices = [
-        (1, 'Living Room Lights', 'lighting', 'on', 0.3, None),
-        (2, 'Kitchen Appliances', 'appliance', 'on', 2.1, None),
-        (3, 'Heating System', 'heating', 'off', 0, None),
-        (4, 'EV Charger', 'charger', 'on', 5.5, None),
-        (5, 'Solar Panels', 'generation', 'on', None, 3.2),
-    ]
-    cursor.executemany('''
-        INSERT INTO devices (id, name, type, status, usage, generation)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ''', devices)
     
     # Seed recommendations
     recommendations = [
@@ -217,7 +170,6 @@ def energy_usage():
 @app.route('/api/auth/check')
 def check_auth():
     if 'logged_in' in session and session['logged_in'] and 'user' in session:
-        print(session['user'])
         return jsonify({
             'authenticated': True,
             'user': session['user']
@@ -226,40 +178,6 @@ def check_auth():
         return jsonify({
             'authenticated': False
         })
-
-@app.route('/api/energy/devices')
-def energy_devices():
-    conn = create_connection()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute("SELECT id, name, type, status, usage, generation FROM devices")
-            rows = cursor.fetchall()
-            
-            result = []
-            for row in rows:
-                device = {
-                    'id': row[0],
-                    'name': row[1],
-                    'type': row[2],
-                    'status': row[3]
-                }
-                
-                if row[4] is not None:
-                    device['usage'] = row[4]
-                if row[5] is not None:
-                    device['generation'] = row[5]
-                
-                result.append(device)
-            
-            return jsonify(result)
-        except Error as e:
-            print(e)
-            return jsonify({'error': str(e)}), 500
-        finally:
-            conn.close()
-    else:
-        return jsonify({'error': 'Database connection failed'}), 500
 
 @app.route('/api/energy/recommendations')
 def energy_recommendations():
@@ -343,160 +261,12 @@ def energy_real_time():
         'unit': 'kW'
     })
 
-# Handle booking form submission
-@app.route('/api/booking/submit', methods=['POST'])
-def submit_booking():
-    data = request.json
-    
-    # Generate a booking ID
-    booking_id = str(uuid.uuid4())
-    
-    # Add timestamp
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
-    conn = create_connection()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute('''
-                INSERT INTO bookings (
-                    id, service_type, date, time, first_name, last_name, 
-                    email, phone, address, city, postcode, notes, timestamp
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                booking_id, 
-                data.get('service_type'), 
-                data.get('date'), 
-                data.get('time'),
-                data.get('first_name'), 
-                data.get('last_name'), 
-                data.get('email'), 
-                data.get('phone'),
-                data.get('address'), 
-                data.get('city'), 
-                data.get('postcode'), 
-                data.get('notes', ''),
-                timestamp
-            ))
-            conn.commit()
-            
-            return jsonify({
-                'success': True,
-                'booking_id': booking_id,
-                'message': 'Booking successfully submitted'
-            })
-        except Error as e:
-            print(e)
-            return jsonify({'error': str(e)}), 500
-        finally:
-            conn.close()
-    else:
-        return jsonify({'error': 'Database connection failed'}), 500
-
-@app.route('/api/booking/list')
-def list_bookings():
-    conn = create_connection()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute('''
-                SELECT id, service_type, date, time, first_name, last_name, 
-                email, phone, address, city, postcode, notes, timestamp
-                FROM bookings ORDER BY timestamp DESC
-            ''')
-            rows = cursor.fetchall()
-            
-            result = []
-            for row in rows:
-                result.append({
-                    'id': row[0],
-                    'service_type': row[1],
-                    'date': row[2],
-                    'time': row[3],
-                    'first_name': row[4],
-                    'last_name': row[5],
-                    'email': row[6],
-                    'phone': row[7],
-                    'address': row[8],
-                    'city': row[9],
-                    'postcode': row[10],
-                    'notes': row[11],
-                    'timestamp': row[12]
-                })
-            
-            return jsonify(result)
-        except Error as e:
-            print(e)
-            return jsonify({'error': str(e)}), 500
-        finally:
-            conn.close()
-    else:
-        return jsonify({'error': 'Database connection failed'}), 500
-
-# Update device status
-@app.route('/api/energy/devices/update', methods=['POST'])
-def update_device():
-    data = request.json
-    device_id = data.get('id')
-    new_status = data.get('status')
-    
-    conn = create_connection()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute('''
-                UPDATE devices SET status = ? WHERE id = ?
-            ''', (new_status, device_id))
-            conn.commit()
-            
-            # If device is turned off, set usage to 0
-            if new_status == 'off':
-                cursor.execute('''
-                    UPDATE devices SET usage = 0 WHERE id = ? AND type != 'generation'
-                ''', (device_id,))
-                conn.commit()
-            
-            # If device is turned on, set a random usage
-            if new_status == 'on':
-                if device_id == 1:  # Living Room Lights
-                    usage = round(random.uniform(0.1, 0.5), 2)
-                elif device_id == 2:  # Kitchen Appliances
-                    usage = round(random.uniform(1.2, 3.5), 2)
-                elif device_id == 3:  # Heating System
-                    usage = round(random.uniform(2.0, 6.0), 2)
-                elif device_id == 4:  # EV Charger
-                    usage = round(random.uniform(4.0, 7.0), 2)
-                else:
-                    usage = round(random.uniform(0.5, 2.0), 2)
-                
-                cursor.execute('''
-                    UPDATE devices SET usage = ? WHERE id = ? AND type != 'generation'
-                ''', (usage, device_id))
-                conn.commit()
-            
-            return jsonify({
-                'success': True,
-                'device_id': device_id,
-                'status': new_status,
-                'message': f'Device {device_id} status updated to {new_status}'
-            })
-        except Error as e:
-            print(e)
-            return jsonify({'error': str(e)}), 500
-        finally:
-            conn.close()
-    else:
-        return jsonify({'error': 'Database connection failed'}), 500
-
 # Login route
 @app.route('/api/auth/login', methods=['POST'])
 def login():
-    # lets get the data from the api
     data = request.json
     email = data.get('email')
     password = data.get('password')
-    # Added for debugging.
-    print(data)
     
     conn = create_connection()
     if conn is not None:
@@ -536,62 +306,46 @@ def login():
 
 @app.route('/api/auth/logout', methods=['POST'])
 def logout():
+    # Clear the session so that that user is logged out
     session.clear()
     return jsonify({
         'success': True,
         'message': 'Logout successful'
     })
 
-# Serve placeholder images
-@app.route('/placeholder.svg')
-def placeholder():
-    width = request.args.get('width', 300)
-    height = request.args.get('height', 200)
-    
-    svg = f'''
-    <svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#f0f0f0"/>
-        <text x="50%" y="50%" font-family="Arial" font-size="20" text-anchor="middle" dominant-baseline="middle" fill="#888">
-            {width}x{height}
-        </text>
-    </svg>
-    '''
-    
-    return svg, 200, {'Content-Type': 'image/svg+xml'}
-
-# Add a new API endpoint to update energy usage data (for testing)
-@app.route('/api/energy/usage/update', methods=['POST'])
-def update_energy_usage():
+@app.route('/api/auth/register', methods=['POST'])
+def register():
     data = request.json
-    date = data.get('date')
-    usage = data.get('usage')
-    cost = data.get('cost', round(usage * 0.28, 2))  # Default cost calculation
-    
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+    role = data.get('role', 'user')  # Default role is 'user'
+
     conn = create_connection()
     if conn is not None:
         try:
             cursor = conn.cursor()
             
-            # Check if the date already exists
-            cursor.execute("SELECT id FROM energy_usage WHERE date = ?", (date,))
-            existing = cursor.fetchone()
+            # Check if the email already exists
+            cursor.execute("SELECT id FROM users WHERE email = ?", (email,))
+            existing_user = cursor.fetchone()
             
-            if existing:
-                # Update existing record
-                cursor.execute('''
-                    UPDATE energy_usage SET usage = ?, cost = ? WHERE date = ?
-                ''', (usage, cost, date))
-            else:
-                # Insert new record
-                cursor.execute('''
-                    INSERT INTO energy_usage (date, usage, cost) VALUES (?, ?, ?)
-                ''', (date, usage, cost))
+            if existing_user:
+                return jsonify({
+                    'success': False,
+                    'message': 'Email already registered'
+                }), 400
             
+            # Insert the new user
+            cursor.execute('''
+                INSERT INTO users (name, email, password, role)
+                VALUES (?, ?, ?, ?)
+            ''', (name, email, password, role))
             conn.commit()
             
             return jsonify({
                 'success': True,
-                'message': f'Energy usage for {date} updated successfully'
+                'message': 'Registration successful'
             })
         except Error as e:
             print(e)
@@ -600,8 +354,6 @@ def update_energy_usage():
             conn.close()
     else:
         return jsonify({'error': 'Database connection failed'}), 500
-    
-
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=3000)
