@@ -1,0 +1,205 @@
+Here are two tailored surveys — Technical and Non-Technical — each with 11 questions. They're based on your digital platform for Rolsa Technologies and follow the structure used in your Task 3A Example.
+
+✅ Technical Survey: Rolsa Technologies Platform
+Target Audience: Developers, testers, accessibility auditors, technical stakeholders.
+
+How intuitive is the navigation structure from a development perspective?
+
+Are the frontend components modular and easy to maintain?
+
+How well does the codebase follow industry best practices (naming, readability, reusability)?
+
+Are API responses fast and consistent under load?
+
+Is the backend database schema scalable and logically designed?
+
+How effectively are errors and exceptions handled throughout the system?
+
+Are security features like password encryption (SHA256) and HTTPS implemented correctly?
+
+How compatible is the system across different screen sizes and browsers?
+
+Are accessibility standards (WCAG 2.1) implemented correctly and tested?
+
+Does the booking system handle simultaneous bookings or requests efficiently?
+
+Are the user dashboards and data visualisations clear and optimised for performance?
+
+✅ Non-Technical Survey: Rolsa Technologies Website
+Target Audience: Customers, parents, homeowners, students, teachers.
+
+How easy was it to find information about green energy solutions on the site?
+
+Was the website navigation clear and easy to use?
+
+Did the booking system for consultations or installations feel simple and straightforward?
+
+How visually appealing do you find the homepage and layout?
+
+Was it clear how to create an account and log in?
+
+Did the information about energy solutions (e.g. solar panels, EV charging) feel informative?
+
+Were you able to easily find and manage your bookings through the account section?
+
+Did the system load quickly and without errors on your device?
+
+Did you feel that the site was designed for users like you (e.g. homeowners, students)?
+
+Would you use this platform again to track energy usage or book a consultation?
+
+How likely are you to recommend Rolsa Technologies to a friend or colleague?
+
+Would you like me to insert these into your document as Appendix 3?
+
+
+
+
+
+
+You said:
+30 questions each one sorry
+
+
+ChatGPT said:
+Absolutely! Here are two surveys, each with 30 questions—one for technical users (e.g. developers, testers), and one for non-technical users (e.g. customers, parents, students)—tailored for Rolsa Technologies' website and platform.
+
+✅ Technical Survey (30 Questions)
+Audience: Developers, backend/frontend engineers, QA testers, accessibility testers
+
+General Development
+Is the codebase organised and easy to navigate?
+
+Are reusable components properly implemented in the frontend?
+
+Does the code follow clean coding principles and naming conventions?
+
+Is component state management efficient and scalable?
+
+Are server responses consistent and structured (e.g. JSON format)?
+
+Is the booking form logic easy to understand and extend?
+
+Backend and API
+Are the API routes logically grouped and secure?
+
+Is the backend framework (Node.js) used effectively?
+
+Is error handling and validation consistent across endpoints?
+
+Are SQL/NoSQL queries optimised for performance?
+
+Is the database schema normalised and scalable?
+
+Is the authentication system secure and well-structured?
+
+Is password hashing implemented correctly (e.g. SHA256)?
+
+Are input sanitisation and validation in place for all forms?
+
+Performance
+Are all pages loading within the target time of 2–6 seconds?
+
+Is API latency below 100ms under typical load?
+
+Are lazy loading or code splitting used effectively?
+
+Are there redundant network calls or duplicate asset loads?
+
+Testing & Debugging
+Have functional and unit tests been written for key features?
+
+Is the booking system tested with valid and invalid inputs?
+
+Are database operations tested under normal and edge cases?
+
+Is error feedback user-friendly and helpful?
+
+Security
+Is HTTPS enforced on all routes?
+
+Are there any obvious vulnerabilities in form handling?
+
+Are cookies secure and HTTP-only where needed?
+
+Is rate limiting or throttling used to prevent abuse?
+
+Deployment & Maintenance
+Is the deployment pipeline (e.g. Vercel, GitHub Actions) automated?
+
+Are logs and error reports collected effectively?
+
+Are environment variables used securely for configuration?
+
+Is the platform documented well enough for future developers?
+
+✅ Non-Technical Survey (30 Questions)
+Audience: General users like customers, parents, students, teachers
+
+First Impressions
+Was the homepage visually appealing and easy to understand?
+
+Was it clear what services Rolsa Technologies offers?
+
+Did the website feel trustworthy and professional?
+
+Was it easy to find the “Book” or “Sign Up” button?
+
+Navigation & Usability
+Could you find what you were looking for easily?
+
+Did you feel lost at any point on the site?
+
+Were the menus clear and simple to use?
+
+Did pages load quickly on your device?
+
+Was the platform mobile-friendly?
+
+Booking Experience
+Was the booking form easy to fill out?
+
+Did the form give clear feedback if something went wrong?
+
+Was it clear whether your booking was successful?
+
+Could you cancel or reschedule a booking without issues?
+
+Did you receive a confirmation or email after booking?
+
+Information & Education
+Did you learn something new about green energy or sustainable tech?
+
+Was the educational content helpful and well explained?
+
+Were the images, icons, and buttons easy to understand?
+
+Were you able to access/download any guides if needed?
+
+Accessibility
+Was the font size readable?
+
+Did the site work well with keyboard-only navigation?
+
+Was there enough colour contrast for clear reading?
+
+Did anything seem difficult to use due to a disability or condition?
+
+Account Features
+Was it easy to create an account?
+
+Did logging in feel secure and smooth?
+
+Could you view your booking history?
+
+Did you understand what loyalty rewards or benefits were available?
+
+General Satisfaction
+Did you feel like the website was built for someone like you?
+
+Would you trust this site to handle your personal information?
+
+Would you use Rolsa Technologies again in the future?
+
+Would you recommend the website to a friend?
+
